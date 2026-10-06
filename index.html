@@ -1,0 +1,1614 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pasaporte de los Pueblos Originarios</title><style>
+
+:root{
+  --ink:#24322b;
+  --paper:#fffaf0;
+  --green:#50735b;
+  --green2:#75947b;
+  --gold:#d7a83d;
+  --brown:#9a6b43;
+  --soft:#f1e7d1;
+  --white:#fff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(135deg,#e9f0df,#f9ead2);
+}
+
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+header{
+  background:var(--green);
+  color:white;
+  padding:22px 5%;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+h1{
+  margin:0;
+  font-size:clamp(1.5rem,3vw,2.4rem);
+}
+
+header p{
+  margin:5px 0 0;
+  opacity:.9;
+}
+
+
+/* =========================
+   PASAPORTE
+========================= */
+
+.passport{
+  background:#fff8df;
+  color:var(--ink);
+
+  padding:10px 14px;
+
+  border-radius:16px;
+
+  box-shadow:0 5px 15px #0002;
+
+  font-weight:700;
+}
+
+.stamps{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:7px;
+}
+
+.stamp{
+  width:36px;
+  height:36px;
+
+  border:2px dashed #927c51;
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  background:#eadfc4;
+
+  filter:grayscale(1);
+  opacity:.45;
+}
+
+.stamp.done{
+  filter:none;
+  opacity:1;
+
+  background:#fff;
+
+  border-color:var(--gold);
+}
+
+
+/* =========================
+   CONTENIDO PRINCIPAL
+========================= */
+
+main{
+  max-width:1250px;
+  margin:auto;
+
+  padding:35px 20px 55px;
+}
+
+.hero{
+  text-align:center;
+
+  max-width:820px;
+
+  margin:0 auto 28px;
+}
+
+.hero h2{
+  font-size:clamp(1.7rem,4vw,3rem);
+
+  margin:0 0 8px;
+}
+
+.hero p{
+  font-size:1.05rem;
+
+  line-height:1.6;
+}
+
+
+/* =========================
+   DISTRIBUCIÓN
+========================= */
+
+.layout{
+  display:grid;
+
+  grid-template-columns:1.35fr .65fr;
+
+  gap:24px;
+
+  align-items:start;
+}
+
+
+/* =========================
+   TARJETA DEL MAPA
+========================= */
+
+.map-card,
+.guide,
+.modal-card{
+
+  background:rgba(255,250,240,.96);
+
+  border:1px solid #0001;
+
+  border-radius:25px;
+
+  box-shadow:0 12px 35px #3b4d3a18;
+}
+
+.map-card{
+  padding:20px;
+}
+
+
+/* =========================
+   MAPA REAL DE ARGENTINA
+========================= */
+
+.map{
+
+  position:relative;
+
+  width:100%;
+
+  /*
+    La imagen original tiene proporción aproximada
+    1024 x 1444.
+  */
+
+  aspect-ratio:1024 / 1444;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  background:#dbe8d3;
+}
+
+
+/*
+  IMAGEN DEL MAPA
+
+  El archivo debe estar en:
+
+  img/mapa-argentina.jpg
+*/
+
+.argentina-map{
+
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  z-index:1;
+
+}
+
+
+/* =========================
+   RUTA DEL VIAJE
+========================= */
+
+.route{
+
+  position:absolute;
+
+  left:43%;
+
+  top:12%;
+
+  width:4px;
+
+  height:75%;
+
+  background:
+
+    repeating-linear-gradient(
+      to bottom,
+      #8e7654cc 0px,
+      #8e7654cc 10px,
+      transparent 10px,
+      transparent 20px
+    );
+
+  transform:rotate(3deg);
+
+  z-index:2;
+
+  pointer-events:none;
+
+  opacity:.75;
+}
+
+
+/* =========================
+   ICONOS / PARADAS
+========================= */
+
+.stop{
+
+  position:absolute;
+
+  transform:translate(-50%,-50%);
+
+  border:0;
+
+  cursor:pointer;
+
+  width:88px;
+
+  height:88px;
+
+  border-radius:50%;
+
+  background:#fff8e8;
+
+  color:var(--ink);
+
+  box-shadow:
+
+    0 8px 18px #0004,
+
+    0 0 0 4px #ffffffaa;
+
+  border:5px solid var(--green2);
+
+  font-weight:800;
+
+  transition:
+
+    transform .2s ease,
+
+    box-shadow .2s ease,
+
+    background .2s ease;
+
+  z-index:4;
+}
+
+
+.stop:hover{
+
+  transform:
+    translate(-50%,-50%)
+    scale(1.12);
+
+  box-shadow:
+
+    0 12px 25px #0005,
+
+    0 0 0 5px #ffffffdd;
+}
+
+
+.stop:active{
+
+  transform:
+    translate(-50%,-50%)
+    scale(.96);
+}
+
+
+.stop.done{
+
+  border-color:var(--gold);
+
+  background:#fff1b7;
+
+  box-shadow:
+
+    0 8px 20px #0004,
+
+    0 0 0 5px #d7a83d88;
+}
+
+
+.stop small{
+
+  display:block;
+
+  font-size:.68rem;
+
+  margin-top:3px;
+
+  line-height:1.1;
+}
+
+
+/* =========================
+   POSICIONES SOBRE EL MAPA
+========================= */
+
+
+/*
+   Estas posiciones están adaptadas
+   a la imagen del mapa que me pasaste.
+*/
+
+
+/* Jujuy / Salta / Tucumán */
+
+.noroeste{
+  left:35%;
+  top:15%;
+}
+
+
+/* Chaco / Formosa */
+
+.chaco{
+  left:54%;
+  top:21%;
+}
+
+
+/* Misiones / Corrientes */
+
+.litoral{
+  left:69%;
+  top:28%;
+}
+
+
+/* Córdoba / Santiago del Estero */
+
+.centro{
+  left:51%;
+  top:34%;
+}
+
+
+/* Mendoza / San Juan */
+
+.cuyo{
+  left:34%;
+  top:37%;
+}
+
+
+/* Buenos Aires */
+
+.buenosaires{
+  left:58%;
+  top:43%;
+}
+
+
+/* Patagonia */
+
+.patagonia{
+  left:39%;
+  top:67%;
+}
+
+
+/* Tierra del Fuego */
+
+.fuego{
+  left:45%;
+  top:88%;
+}
+
+
+/* =========================
+   GUÍA DE TAMARA
+========================= */
+
+.guide{
+
+  padding:23px;
+
+  position:sticky;
+
+  top:18px;
+}
+
+
+.tamara{
+
+  width:110px;
+
+  height:110px;
+
+  border-radius:50%;
+
+  margin:0 auto 15px;
+
+  display:grid;
+
+  place-items:center;
+
+  font-size:4rem;
+
+  background:#e5c99c;
+
+  border:6px solid #fff;
+
+  box-shadow:0 8px 18px #0002;
+}
+
+
+.guide h3{
+
+  text-align:center;
+
+  margin:5px 0 10px;
+}
+
+
+.guide p{
+
+  line-height:1.6;
+}
+
+
+.tip{
+
+  background:#eef3e8;
+
+  border-left:5px solid var(--green);
+
+  padding:12px 14px;
+
+  border-radius:10px;
+}
+
+
+/* =========================
+   PROGRESO
+========================= */
+
+.progress{
+
+  height:12px;
+
+  background:#dfd5c2;
+
+  border-radius:20px;
+
+  overflow:hidden;
+}
+
+
+.progress > div{
+
+  height:100%;
+
+  background:var(--gold);
+
+  width:0%;
+
+  transition:.4s;
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+button.primary{
+
+  border:0;
+
+  background:var(--green);
+
+  color:white;
+
+  padding:12px 18px;
+
+  border-radius:12px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+
+button.primary:hover{
+
+  background:#3e5d47;
+
+  transform:translateY(-2px);
+}
+
+
+/* =========================
+   VENTANA MODAL
+========================= */
+
+.modal{
+
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  background:#172019aa;
+
+  z-index:10;
+
+  padding:20px;
+
+  align-items:center;
+
+  justify-content:center;
+}
+
+
+.modal.show{
+
+  display:flex;
+}
+
+
+.modal-card{
+
+  max-width:650px;
+
+  width:100%;
+
+  padding:28px;
+
+  max-height:90vh;
+
+  overflow:auto;
+}
+
+
+.modal-card h2{
+
+  margin-top:0;
+}
+
+
+.info{
+
+  background:#f5ecd9;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  margin:15px 0;
+
+  line-height:1.6;
+}
+
+
+.actions{
+
+  display:flex;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  justify-content:flex-end;
+}
+
+
+.close{
+
+  background:#ddd8ca!important;
+
+  color:var(--ink)!important;
+}
+
+
+/* =========================
+   PANTALLA FINAL
+========================= */
+
+.final{
+
+  display:none;
+
+  text-align:center;
+
+  background:#fff8df;
+
+  padding:30px;
+
+  border-radius:22px;
+
+  margin-top:25px;
+
+  border:2px solid var(--gold);
+}
+
+
+.final.show{
+
+  display:block;
+}
+
+
+/* =========================
+   PIE
+========================= */
+
+footer{
+
+  text-align:center;
+
+  padding:25px;
+
+  color:#536057;
+
+  font-size:.9rem;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+
+  .layout{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .guide{
+
+    position:static;
+
+  }
+
+  .map-card{
+
+    padding:10px;
+
+  }
+
+  .stop{
+
+    width:68px;
+
+    height:68px;
+
+    font-size:.78rem;
+
+    border-width:4px;
+
+  }
+
+  .stop small{
+
+    font-size:.57rem;
+
+  }
+
+  .route{
+
+    opacity:.45;
+
+  }
+
+}
+
+
+/* =========================
+   CELULARES PEQUEÑOS
+========================= */
+
+@media(max-width:500px){
+
+  .stop{
+
+    width:58px;
+
+    height:58px;
+
+    font-size:.68rem;
+
+    border-width:3px;
+
+  }
+
+  .stop small{
+
+    font-size:.49rem;
+
+  }
+
+  .map-card{
+
+    padding:5px;
+
+  }
+
+}
+
+
+/* =========================
+   IMPRESIÓN
+========================= */
+
+@media print{
+
+  body{
+
+    background:white;
+
+  }
+
+  header{
+
+    background:var(--green)!important;
+
+    print-color-adjust:exact;
+
+  }
+
+  .guide{
+
+    display:none;
+
+  }
+
+  .layout{
+
+    display:block;
+
+  }
+
+  .map-card{
+
+    box-shadow:none;
+
+  }
+
+  .hero{
+
+    margin-bottom:10px;
+
+  }
+
+  .final{
+
+    display:block!important;
+
+  }
+
+  footer{
+
+    display:none;
+
+  }
+
+}
+
+</style></head><body><!-- ==========================================
+     ENCABEZADO
+=========================================== --><header>  <div><h1>
+  🇦🇷 Pasaporte de los Pueblos Originarios
+</h1>
+
+<p>
+  Un viaje interactivo por la diversidad cultural de Argentina
+</p>
+
+  </div>  <div class="passport">🎫 Pasaporte de Tamara
+
+<div
+  class="stamps"
+  id="stamps">
+</div>
+
+  </div></header><!-- ==========================================
+     CONTENIDO
+=========================================== --><main>  <section class="hero"><h2>
+  ¡Comencemos el viaje!
+</h2>
+
+<p>
+
+  Explorá las distintas regiones, conocé algunos pueblos originarios
+  y reuní todos los sellos de tu pasaporte.
+
+  Recordá: los pueblos originarios forman parte del presente
+  de la Argentina, no solamente de su pasado.
+
+</p>
+
+  </section>  <section class="layout"><!-- ======================================
+     MAPA
+======================================= -->
+
+<div class="map-card">
+
+  <div
+    class="map"
+    aria-label="Mapa de Argentina con paradas interactivas"
+  >
+
+
+    <!--
+      =====================================
+      IMAGEN DEL MAPA
+
+      Guardá la imagen como:
+
+      img/mapa-argentina.jpg
+
+      =====================================
+    -->
+
+    <img
+      src="img/mapa-argentina.jpg"
+      alt="Mapa de Argentina con territorios de ocupación actual, tradicional y pública de pueblos originarios"
+      class="argentina-map"
+    >
+
+
+    <!-- Línea del recorrido -->
+
+    <div class="route"></div>
+
+
+
+    <!-- ==================================
+         PARADAS
+    =================================== -->
+
+
+    <!-- NOROESTE -->
+
+    <button
+      class="stop noroeste"
+      data-id="noroeste"
+      aria-label="Abrir información del Noroeste"
+    >
+
+      🏔️
+
+      <small>
+        Noroeste
+      </small>
+
+    </button>
+
+
+
+    <!-- CHACO -->
+
+    <button
+      class="stop chaco"
+      data-id="chaco"
+      aria-label="Abrir información del Gran Chaco"
+    >
+
+      🌿
+
+      <small>
+        Chaco
+      </small>
+
+    </button>
+
+
+
+    <!-- LITORAL -->
+
+    <button
+      class="stop litoral"
+      data-id="litoral"
+      aria-label="Abrir información del Litoral"
+    >
+
+      🌳
+
+      <small>
+        Litoral
+      </small>
+
+    </button>
+
+
+
+    <!-- CENTRO -->
+
+    <button
+      class="stop centro"
+      data-id="centro"
+      aria-label="Abrir información del Centro"
+    >
+
+      🏺
+
+      <small>
+        Centro
+      </small>
+
+    </button>
+
+
+
+    <!-- CUYO -->
+
+    <button
+      class="stop cuyo"
+      data-id="cuyo"
+      aria-label="Abrir información de Cuyo"
+    >
+
+      💧
+
+      <small>
+        Cuyo
+      </small>
+
+    </button>
+
+
+
+    <!-- BUENOS AIRES -->
+
+    <button
+      class="stop buenosaires"
+      data-id="buenosaires"
+      aria-label="Abrir información de Buenos Aires"
+    >
+
+      🏙️
+
+      <small>
+        Buenos Aires
+      </small>
+
+    </button>
+
+
+
+    <!-- PATAGONIA -->
+
+    <button
+      class="stop patagonia"
+      data-id="patagonia"
+      aria-label="Abrir información de Patagonia"
+    >
+
+      🐎
+
+      <small>
+        Patagonia
+      </small>
+
+    </button>
+
+
+
+    <!-- TIERRA DEL FUEGO -->
+
+    <button
+      class="stop fuego"
+      data-id="fuego"
+      aria-label="Abrir información de Tierra del Fuego"
+    >
+
+      🔥
+
+      <small>
+        Tierra del Fuego
+      </small>
+
+    </button>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================================
+     GUÍA
+======================================= -->
+
+<aside class="guide">
+
+
+  <div class="tamara">
+
+    🧭
+
+  </div>
+
+
+  <h3>
+    Tamara te acompaña
+  </h3>
+
+
+  <p id="guideText">
+
+    Hacé clic en una parada del mapa.
+
+    Allí encontrarás una explicación,
+    pueblos destacados y un dato curioso.
+
+  </p>
+
+
+  <div class="tip">
+
+    <strong>
+      Consejo:
+    </strong>
+
+    visitá todas las paradas para completar
+    tu pasaporte.
+
+  </div>
+
+
+  <p>
+
+    <strong>
+      Progreso:
+    </strong>
+
+    <span id="count">
+      0
+    </span>
+
+    /8 sellos
+
+  </p>
+
+
+  <div class="progress">
+
+    <div id="bar"></div>
+
+  </div>
+
+
+</aside>
+
+  </section>  <!-- ======================================
+       FINAL
+  ======================================= -->  <section
+    class="final"
+    id="final"
+  ><h2>
+  🎉 ¡Pasaporte completo!
+</h2>
+
+
+<p>
+
+  Recorriste las ocho paradas y aprendiste
+  sobre la diversidad de los pueblos originarios
+  de Argentina.
+
+</p>
+
+
+<button
+  class="primary"
+  onclick="window.print()"
+>
+
+  🖨️ Imprimir / guardar el mapa
+
+</button>
+
+  </section></main><!-- ==========================================
+     PIE
+=========================================== --><footer>Material educativo introductorio.
+
+Para ampliar la información,
+consultar fuentes oficiales como el INAI.
+
+</footer><!-- ==========================================
+     MODAL
+=========================================== --><div
+  class="modal"
+  id="modal"
+>  <div class="modal-card"><h2 id="modalTitle"></h2>
+
+
+<div id="modalBody"></div>
+
+
+<div class="actions">
+
+
+  <button
+    class="primary close"
+    onclick="closeModal()"
+  >
+
+    Cerrar
+
+  </button>
+
+
+  <button
+    class="primary"
+    id="stampBtn"
+  >
+
+    🎫 Obtener sello
+
+  </button>
+
+
+</div>
+
+  </div></div><!-- ==========================================
+     JAVASCRIPT
+=========================================== --><script>
+
+
+const places = {
+
+
+  noroeste:{
+
+    title:"🏔️ Noroeste",
+
+    peoples:
+      "Kolla, Quechua, Omaguaca, Atacama, Diaguita y otros pueblos.",
+
+    provinces:
+      "Jujuy, Salta, Tucumán y Catamarca, entre otras áreas.",
+
+    text:
+      "El Noroeste argentino presenta una gran diversidad cultural y una larga historia de ocupación humana. Allí existen comunidades pertenecientes a distintos pueblos originarios, con identidades y trayectorias propias.",
+
+    fact:
+      "En esta región se conservan conocimientos y prácticas relacionados con la agricultura, el tejido, la cerámica y el aprovechamiento de ambientes de montaña y valles."
+
+  },
+
+
+  chaco:{
+
+    title:"🌿 Gran Chaco",
+
+    peoples:
+      "Qom, Wichí, Pilagá, Moqoit, Chorote, Nivaclé, Tapiete y Chané, entre otros.",
+
+    provinces:
+      "Chaco, Formosa, Salta y zonas de Santa Fe.",
+
+    text:
+      "El Gran Chaco reúne una enorme diversidad ambiental y cultural. Sus pueblos desarrollaron conocimientos vinculados con el territorio, el agua, las plantas y los animales.",
+
+    fact:
+      "Los conocimientos sobre el ambiente tienen un papel importante en las formas de vida y en la transmisión cultural de distintas comunidades chaqueñas."
+
+  },
+
+
+  litoral:{
+
+    title:"🌳 Litoral y Selva",
+
+    peoples:
+      "Mbya Guaraní, Guaraní, Ava Guaraní y otros pueblos vinculados históricamente con la región.",
+
+    provinces:
+      "Misiones y otras zonas del Nordeste argentino.",
+
+    text:
+      "El Litoral y la selva misionera están relacionados con la presencia histórica y actual de pueblos de tradición guaraní.",
+
+    fact:
+      "La relación con la selva, el territorio y los recursos naturales ocupa un lugar importante en la vida cultural de comunidades Mbya Guaraní."
+
+  },
+
+
+  centro:{
+
+    title:"🏺 Centro",
+
+    peoples:
+      "Comechingón, Sanavirón, Ranquel, Tonokoté, Lule y otros pueblos reconocidos en la región.",
+
+    provinces:
+      "Córdoba, Santiago del Estero, San Luis, La Pampa y áreas cercanas.",
+
+    text:
+      "El centro del país también posee presencia indígena actual y una historia cultural diversa. Es importante no reducir a estos pueblos solamente a su pasado.",
+
+    fact:
+      "Distintos pueblos de esta región desarrollaron formas de organización, producción y adaptación a ambientes muy variados."
+
+  },
+
+
+  cuyo:{
+
+    title:"💧 Cuyo",
+
+    peoples:
+      "Huarpe, Mapuche, Diaguita y comunidades de otros pueblos.",
+
+    provinces:
+      "Mendoza, San Juan, San Luis y áreas cercanas.",
+
+    text:
+      "Cuyo presenta ambientes áridos y una historia marcada por el uso y manejo del agua. El pueblo Huarpe tiene una relación histórica profunda con esta región.",
+
+    fact:
+      "En ambientes áridos, el conocimiento y aprovechamiento del agua resulta fundamental para la vida y la organización de las comunidades."
+
+  },
+
+
+  buenosaires:{
+
+    title:"🏙️ Buenos Aires",
+
+    peoples:
+      "Mapuche, Qom, Guaraní, Quechua, Huarpe, Diaguita, Tehuelche y otros pueblos.",
+
+    provinces:
+      "Ciudad y provincia de Buenos Aires.",
+
+    text:
+      "Los pueblos originarios también forman parte de las ciudades actuales. Muchas familias y comunidades indígenas viven en ámbitos urbanos y mantienen sus identidades y vínculos comunitarios.",
+
+    fact:
+      "La presencia indígena no se limita a zonas rurales: también forma parte de la vida cotidiana de las grandes ciudades argentinas."
+
+  },
+
+
+  patagonia:{
+
+    title:"🐎 Patagonia",
+
+    peoples:
+      "Mapuche, Tehuelche, Mapuche-Tehuelche y otros pueblos.",
+
+    provinces:
+      "Neuquén, Río Negro, Chubut, Santa Cruz y La Pampa.",
+
+    text:
+      "La Patagonia posee una importante diversidad de pueblos y comunidades. Sus historias están profundamente relacionadas con los territorios que habitan y con las transformaciones ocurridas durante los últimos siglos.",
+
+    fact:
+      "Las identidades mapuche y tehuelche continúan formando parte del presente cultural de la Patagonia."
+
+  },
+
+
+  fuego:{
+
+    title:"🔥 Tierra del Fuego",
+
+    peoples:
+      "Selk'nam y otros pueblos vinculados históricamente con Tierra del Fuego.",
+
+    provinces:
+      "Tierra del Fuego.",
+
+    text:
+      "En el extremo sur encontramos la historia y la presencia del pueblo Selk'nam, asociado históricamente con la Isla Grande de Tierra del Fuego.",
+
+    fact:
+      "Los Selk'nam desarrollaron formas de vida adaptadas a las condiciones particulares del territorio fueguino."
+
+  }
+
+};
+
+
+
+/* ==========================================
+   ESTADO DEL PASAPORTE
+=========================================== */
+
+const stamps = {};
+
+let current = null;
+
+
+
+/* ==========================================
+   ACTUALIZAR SELLOS
+=========================================== */
+
+function renderStamps(){
+
+  const el =
+    document.getElementById("stamps");
+
+  el.innerHTML = "";
+
+
+  Object.keys(places).forEach(id=>{
+
+    const s =
+      document.createElement("span");
+
+
+    s.className =
+      "stamp" +
+      (stamps[id] ? " done" : "");
+
+
+    s.textContent =
+      stamps[id] ? "✓" : "○";
+
+
+    s.title =
+      places[id].title;
+
+
+    el.appendChild(s);
+
+
+    const stop =
+      document.querySelector(
+        `.stop[data-id="${id}"]`
+      );
+
+
+    if(stop){
+
+      stop.classList.toggle(
+        "done",
+        !!stamps[id]
+      );
+
+    }
+
+  });
+
+
+  const total =
+    Object.keys(places).length;
+
+
+  const done =
+    Object.values(stamps)
+      .filter(Boolean)
+      .length;
+
+
+  document.getElementById("count")
+    .textContent = done;
+
+
+  document.getElementById("bar")
+    .style.width =
+      (done / total * 100) + "%";
+
+
+  if(done === total){
+
+    document
+      .getElementById("final")
+      .classList.add("show");
+
+  }
+
+}
+
+
+
+/* ==========================================
+   ABRIR UNA PARADA
+=========================================== */
+
+function openPlace(id){
+
+  current = id;
+
+  const p =
+    places[id];
+
+
+  document.getElementById("modalTitle")
+    .textContent = p.title;
+
+
+  document.getElementById("modalBody")
+    .innerHTML = `
+
+      <p>
+
+        <strong>
+          Pueblos destacados:
+        </strong>
+
+        ${p.peoples}
+
+      </p>
+
+
+      <p>
+
+        <strong>
+          Zona de referencia:
+        </strong>
+
+        ${p.provinces}
+
+      </p>
+
+
+      <div class="info">
+
+        <strong>
+          📖 Conocé la región
+        </strong>
+
+        <br>
+
+        ${p.text}
+
+      </div>
+
+
+      <div class="info">
+
+        <strong>
+          💡 Dato curioso
+        </strong>
+
+        <br>
+
+        ${p.fact}
+
+      </div>
+
+    `;
+
+
+  document.getElementById("stampBtn")
+    .textContent =
+      stamps[id]
+        ? "✓ Sello obtenido"
+        : "🎫 Obtener sello";
+
+
+  document.getElementById("modal")
+    .classList.add("show");
+
+}
+
+
+
+/* ==========================================
+   CERRAR MODAL
+=========================================== */
+
+function closeModal(){
+
+  document
+    .getElementById("modal")
+    .classList.remove("show");
+
+}
+
+
+
+/* ==========================================
+   EVENTOS DE LOS BOTONES
+=========================================== */
+
+document
+  .querySelectorAll(".stop")
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      "click",
+      ()=>{
+        openPlace(btn.dataset.id);
+      }
+    );
+
+  });
+
+
+
+/* ==========================================
+   OBTENER SELLO
+=========================================== */
+
+document
+  .getElementById("stampBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(current){
+
+        stamps[current] = true;
+
+        renderStamps();
+
+        document
+          .getElementById("stampBtn")
+          .textContent =
+            "✓ Sello obtenido";
+
+      }
+
+    }
+  );
+
+
+
+/* ==========================================
+   CERRAR HACIENDO CLIC FUERA
+=========================================== */
+
+document
+  .getElementById("modal")
+  .addEventListener(
+    "click",
+    e=>{
+
+      if(e.target.id === "modal"){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+
+/* ==========================================
+   INICIAR
+=========================================== */
+
+renderStamps();
+
+</script></body>
+</html>
